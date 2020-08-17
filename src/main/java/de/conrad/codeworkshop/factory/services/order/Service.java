@@ -4,6 +4,7 @@ import de.conrad.codeworkshop.factory.services.factory.Controller;
 import de.conrad.codeworkshop.factory.services.order.api.Order;
 import de.conrad.codeworkshop.factory.services.order.api.OrderConfirmation;
 import de.conrad.codeworkshop.factory.services.order.api.OrderNumber;
+import de.conrad.codeworkshop.factory.services.order.validation.OrderValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -21,9 +22,12 @@ public class Service {
 
     private final Controller factoryController;
 
+    private final OrderValidator orderValidator;
+
     @Autowired
-    public Service(de.conrad.codeworkshop.factory.services.factory.Controller factoryController) {
+    public Service(de.conrad.codeworkshop.factory.services.factory.Controller factoryController, OrderValidator orderValidator) {
         this.factoryController = factoryController;
+        this.orderValidator = orderValidator;
     }
 
     /**
@@ -32,7 +36,7 @@ public class Service {
      */
     @PostMapping("/create")
     public OrderConfirmation createOrder(final Order order) {
-        order.validate();
+        orderValidator.validateOrder(order);
 
         final OrderConfirmation orderConfirmation;
 
