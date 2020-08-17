@@ -14,7 +14,7 @@ class Service {
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private ConcurrentLinkedQueue<Order> manufacturingQueue = new ConcurrentLinkedQueue<>();
 
-    void enqueue(final Order order) {
+    public void enqueue(final Order order) {
         order.setStatus(OrderStatus.IN_PROGRESS);
         manufacturingQueue.add(order);
     }

@@ -35,5 +35,11 @@ dependencies {
     implementation group: 'com.google.code.findbugs', name: 'annotations', version: '3.0.1'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.1.RELEASE'
 
-    testImplementation("junit:junit")
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform()
 }
