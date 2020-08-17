@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class OrderWorkerSchedulerTest {
 
-//    @Autowired
-//    OrderWorkerScheduler orderScheduler;
+    @Autowired
+    OrderWorkerScheduler orderScheduler;
 
     @Autowired
     Service serviceFactory;
