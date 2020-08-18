@@ -12,9 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderWorkerSchedulerTest {
 
     @Autowired
-    OrderWorkerScheduler orderScheduler;
-
-    @Autowired
     Service serviceFactory;
 
     @Autowired
@@ -33,10 +30,16 @@ class OrderWorkerSchedulerTest {
         serviceFactory.enqueue(order3);
         assertEquals(OrderStatus.IN_PROGRESS, order3.getStatus());
 
-        Thread.sleep(15100);
-        assertEquals(3, notificationService.getCustomerIdsToNotify().size());
+        Thread.sleep(5500);
+        assertEquals(1, notificationService.getCustomerIdsToNotify().size());
         assertEquals(OrderStatus.COMPLETED, order1.getStatus());
+
+        Thread.sleep(5500);
+        assertEquals(2, notificationService.getCustomerIdsToNotify().size());
         assertEquals(OrderStatus.COMPLETED, order2.getStatus());
+
+        Thread.sleep(5500);
+        assertEquals(3, notificationService.getCustomerIdsToNotify().size());
         assertEquals(OrderStatus.COMPLETED, order3.getStatus());
     }
 

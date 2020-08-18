@@ -76,7 +76,6 @@ public class ControllerTest {
         testOrder.setPositions(Collections.singletonList(shortIdPosition));
 
         performPostCreateOrderAction(testOrder).andExpect(status().isOk())
-                .andDo(result -> System.out.println(result.getResponse().getContentAsString()))
                 .andExpect(jsonPath("status", is("DECLINED")));
 
         Position validPosition = new Position();

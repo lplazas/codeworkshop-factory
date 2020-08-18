@@ -21,16 +21,12 @@ public class OrderWorker implements Runnable {
 
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()){
+        Order orderToProcess = factoryService.getOrderToProcess();
+        if (orderToProcess != null) {
             LOGGER.info("Processing new order");
-            try {
-                Order orderToProcess = factoryService.deque();
-                orderToProcess.setStatus(OrderStatus.COMPLETED);
-                waitOnLock(5000);
-                notificationService.notifyCustomer(orderToProcess);
-            } catch (InterruptedException e) {
-                LOGGER.error("Error processing order", e);
-            }
+            orderToProcess.setStatus(OrderStatus.COMPLETED);
+            waitOnLock(5000);
+            notificationService.notifyCustomer(orderToProcess);
         }
     }
 
