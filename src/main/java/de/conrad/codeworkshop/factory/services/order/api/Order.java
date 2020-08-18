@@ -12,14 +12,6 @@ public class Order {
     private OrderConfirmation orderConfirmation;
     private OrderStatus status = PENDING;
 
-    public void validate() {
-        if (!positions.isEmpty() && status == PENDING) {
-            status = ACCEPTED;
-        } else {
-            status = DECLINED;
-        }
-    }
-
     public void setOrderConfirmation(final OrderConfirmation orderConfirmation) {
         this.orderConfirmation = orderConfirmation;
     }
