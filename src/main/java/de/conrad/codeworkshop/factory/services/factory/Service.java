@@ -2,11 +2,8 @@ package de.conrad.codeworkshop.factory.services.factory;
 
 import de.conrad.codeworkshop.factory.services.order.api.Order;
 import de.conrad.codeworkshop.factory.services.order.api.OrderStatus;
-
 import java.util.Queue;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * @author Andreas Hartmann

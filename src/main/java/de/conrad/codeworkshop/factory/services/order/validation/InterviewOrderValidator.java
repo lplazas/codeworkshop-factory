@@ -14,7 +14,8 @@ public class InterviewOrderValidator implements OrderValidator{
 
     @Override
     public void validateOrder(Order order) {
-        boolean allPositionsAreValid = order.getPositions().stream()
+        boolean allPositionsAreValid = order.getPositions() != null &&
+                order.getPositions().stream()
                 .filter(pos -> {
                     int length = (int) Math.log10(pos.getProductId()) + 1;
                     return length >= 6 && length <= 9;
@@ -23,7 +24,7 @@ public class InterviewOrderValidator implements OrderValidator{
                         pos.getQuantity().compareTo(new BigDecimal("42.42")) == 0 ||
                         pos.getQuantity().remainder(BigDecimal.TEN).compareTo(BigDecimal.ZERO) == 0
                 ).count() == order.getPositions().size();
-        if (!order.getPositions().isEmpty() && order.getStatus() == PENDING && allPositionsAreValid) {
+        if (allPositionsAreValid && !order.getPositions().isEmpty() && order.getStatus() == PENDING) {
             order.setStatus(ACCEPTED);
         } else {
             order.setStatus(DECLINED);
